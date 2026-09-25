@@ -20,6 +20,8 @@ Ask a max of 3 clarifying questions such as:
 Skip any/all of these questions if the information is already given. 
 E.g. "I am an experience Go engineer looking to contribute to Go projects" shares the experience and stack knowledge up front.
 
+From these questions, create a goal to satisfy them. E.g. "Find a Go repo suitable for an experienced engineer who is new to Go"
+
 # Search for repos
 
 Search for repos based on the context after asking clarifying questions. 
@@ -27,19 +29,13 @@ This should use the `search_repos` tool based on the context you have (e.g. lang
 
 # Assess Repo Suitability
 
-For the found repos, assess their suitability by fetching the repo details via the `get_repo` tool.
-Use the `assess-repo-suitability` skill to evaluate the repo.
+For the found repos, evaluate their suitability via the `evaluate-repo` subagent.
+Check the repos in parallel with a batch size of 5 to speed up processing and provide the defined goal to the subagent.
+Discard or shortlist the repo based on the review outcome.
+If you have not found 3 suitable repos in a batch, send the next batch of repos to the subagents.
+If you have found more than 3 suitable repos in a batch, judge them and filter to only have 3 repos.
 
-# Review Repo Issues
-
-For the repos, fetch the currently open and unassigned issues via the `search_issues` tool.
-Use the `assess-repo-issue-suitability` skill to judge how suitable each issue is.
-
-Discard or shortlist the repo based on the review outcome. 
-If you have found a suitable issue for the repo, don't check for other repo issues.
-If you have found no suitable issue after the first 20, move on to other repos.
-
-Once you have shortlisted 3 suitable repos, do not check for the remaining repos. 
+Once you have found 3 suitable repos, do not continue checking repo suitability.
 
 # Format Response
 
@@ -49,4 +45,4 @@ Repo name [url]
 Overview
 Suggested Issue
 
-Use this format for all 3 shortlisted repos and number them to show a priority.
+Use this format for all 3 shortlisted repos and number them to show a priority, with the most suitable repo listed first.
