@@ -6,7 +6,7 @@ const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 function createMcpServer(): McpServer {
   const server = new McpServer({
-    name: "issue-evaluator-mcp",
+    name: "github-contribution-finder",
     version: "1.0.0",
   });
 

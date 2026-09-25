@@ -4,7 +4,7 @@ description: >-
    Based on the user's question, find a prioritised list of 3 Github repositories they could contribute to. 
   Ask qualifying questions to understand the users experience and stack familiarity.
     Use this skill when the user asks for a suggestion or to help find them a repo to contribute to. 
-  This depends on the issue-evaluator-mcp server, which should be the sole source of information.
+  This depends on the github-contribution-finder server, which should be the sole source of information.
 ---
 
 # Ask qualifying questions
