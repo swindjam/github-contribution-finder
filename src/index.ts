@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { registerTools } from "./tools/index.js";
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
@@ -10,8 +11,7 @@ function createMcpServer(): McpServer {
     version: "1.0.0",
   });
 
-  // Tools get registered here, e.g.:
-  // server.registerTool("toolName", { ... }, async (args) => { ... });
+  registerTools(server);
 
   return server;
 }
