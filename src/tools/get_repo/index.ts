@@ -1,5 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+import { octokit } from "../../shared/github.js";
+import { getRepo } from "./get-repo.js";
 
 export function registerGetRepo(server: McpServer) {
   server.registerTool(
@@ -11,8 +13,20 @@ export function registerGetRepo(server: McpServer) {
         repo: z.string().describe("Repository name"),
       },
     },
-    async ({ owner, repo }) => ({
-      content: [{ type: "text", text: `get_repo not implemented (${owner}/${repo})` }],
-    }),
+    async ({ owner, repo }) => {
+      const result = await getRepo(octokit, owner, repo);
+
+      switch (result.status) {
+        case "found":
+          return { content: [{ type: "text", text: JSON.stringify(result.repo, null, 2) }] };
+        case "not_found":
+          return { content: [{ type: "text", text: `Repository ${owner}/${repo} was not found.` }] };
+        case "error":
+          return {
+            isError: true,
+            content: [{ type: "text", text: `Failed to fetch ${owner}/${repo}: ${result.message}` }],
+          };
+      }
+    },
   );
 }
