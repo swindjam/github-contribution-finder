@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
 import { z } from "zod";
 
 export function registerSearchRepoIssues(server: McpServer) {

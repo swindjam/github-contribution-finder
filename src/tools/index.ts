@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
 import { registerSearchRepos } from "./search_repos/index";
 import { registerGetRepo } from "./get_repo/index";
 import { registerSearchRepoIssues } from "./search_repo_issues/index";

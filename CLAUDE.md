@@ -32,9 +32,11 @@ Follow the `get_repo` / `get_repo_issue` pattern:
 - Spy on `globalThis.fetch` with `vi.spyOn` so the full request flow runs, and assert the URL that was requested.
 - Cover success, 404, a server error, and a failed request.
 
-## Code style
+## Build and modules
 
-- Do not use `.js` extensions on relative imports (`from "./get-repo"`, not `from "./get-repo.js"`)
+- The project is native ESM (`"type": "module"`). `tsconfig.json` uses `module: esnext` / `moduleResolution: bundler` with `noEmit`; `tsc` is only used to type-check (`npm run typecheck`).
+- `npm run build` bundles `src/index.ts` to `dist/index.js` with tsup (config in `tsup.config.ts`). `npm start` runs the bundle.
+- Do not use `.js` extensions on relative imports (`from "./get-repo"`, not `from "./get-repo.js"`). The bundler resolves them. SDK package imports such as `@modelcontextprotocol/sdk/server/mcp.js` keep theirs because they are package subpath exports.
 
 ## Working style
 
