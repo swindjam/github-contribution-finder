@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import { registerTools } from "./tools/index.js";
+import { registerTools } from "./tools/index";
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 

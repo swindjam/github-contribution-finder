@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { octokit } from "../../shared/github.js";
-import { getRepo } from "./get-repo.js";
+import { octokit } from "../../shared/github";
+import { getRepo } from "./get-repo";
 
 export function registerGetRepo(server: McpServer) {
   server.registerTool(

@@ -1,0 +1,43 @@
+# github-contribution-finder
+
+MCP server (Express + `StreamableHTTPServerTransport`, stateless) that exposes GitHub lookups as tools for the `evaluate-repo` agent and the skills in `.claude/`.
+
+## Tools
+
+Tool names are snake_case and match `.claude/agents/evaluate-repo.md`. Each tool lives in its own snake_case directory under `src/tools/` and is registered from `src/tools/index.ts`.
+
+| Tool | Params |
+|---|---|
+| `search_repos` | `language: string` |
+| `get_repo` | `owner: string`, `repo: string` |
+| `search_repo_issues` | `owner: string`, `repo: string`, `pageSize: number` |
+| `get_repo_issue` | `owner: string`, `repo: string`, `issue: number` |
+
+## Tool structure
+
+Follow the `get_repo` / `get_repo_issue` pattern:
+
+- `src/tools/<tool>/<tool-name>.ts`: the logic, as a function that takes the Octokit client as its first argument (dependency injection). Do not import `src/shared/github.ts` here.
+- `src/tools/<tool>/index.ts`: thin MCP registration only. Defines the zod input schema, calls the logic function with the shared `octokit`, and maps the result to MCP content.
+- `src/tools/<tool>/tests/<tool-name>.test.ts`: vitest tests.
+- The logic function wraps the request in try/catch and returns a discriminated union: `found`, `not_found` (GitHub 404) or `error` (anything else).
+- In the registration, `not_found` is a normal text result. `error` sets `isError: true`.
+- The shared client lives in `src/shared/github.ts` and reads `GITHUB_TOKEN`. Keep `.env.example` in step with any new env vars.
+
+## Testing
+
+- Use vitest (`npm test`).
+- Put tests in a `tests/` subdirectory next to the code under test (`src/tools/<tool>/tests/<tool-name>.test.ts`), not alongside the source files. Import the code under test from the parent directory (`from "../<tool-name>"`).
+- Use the real `Octokit` class. Do not mock the octokit module.
+- Spy on `globalThis.fetch` with `vi.spyOn` so the full request flow runs, and assert the URL that was requested.
+- Cover success, 404, a server error, and a failed request.
+
+## Code style
+
+- Do not use `.js` extensions on relative imports (`from "./get-repo"`, not `from "./get-repo.js"`)
+
+## Working style
+
+- When asked to plan, include the actual code in the plan.
+- Only do what the current step asks. For example, if asked for tool shape and registration, do not add GitHub logic yet.
+- Do not commit unless asked.
