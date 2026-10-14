@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
+import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import { octokit } from "../../shared/github";
 import { getRepo } from "./get-repo";
@@ -8,10 +8,10 @@ export function registerGetRepo(server: McpServer) {
     "get_repo",
     {
       description: "Get details for a GitHub repository.",
-      inputSchema: {
+      inputSchema: z.object({
         owner: z.string().describe("Repository owner"),
         repo: z.string().describe("Repository name"),
-      },
+      }),
     },
     async ({ owner, repo }) => {
       const result = await getRepo(octokit, owner, repo);

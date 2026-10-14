@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
+import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import { octokit } from "../../shared/github";
 import { getRepoIssue } from "./get-repo-issue";
@@ -8,11 +8,11 @@ export function registerGetRepoIssue(server: McpServer) {
     "get_repo_issue",
     {
       description: "Get the details of a single issue in a GitHub repository.",
-      inputSchema: {
+      inputSchema: z.object({
         owner: z.string().describe("Repository owner"),
         repo: z.string().describe("Repository name"),
         issue: z.number().describe("Issue number"),
-      },
+      }),
     },
     async ({ owner, repo, issue }) => {
       const result = await getRepoIssue(octokit, owner, repo, issue);
