@@ -17,7 +17,9 @@ Getting started
 Add the MCP server to your local agent (e.g. Claude)
 `claude mcp add --transport http github-contribution-finder http://localhost:3000/mcp`
 
-Start the app
+Create a `.env` file, based off `.env.example`. This requires a `GITHUB_TOKEN`.
+
+Then start the app
 
 `npm run dev`
 
