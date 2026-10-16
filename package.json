@@ -1,7 +1,7 @@
 {
   "name": "github-contribution-finder",
   "version": "1.0.0",
-  "description": "",
+  "description": "Demo project using agent skills, subagents and MCP tools",
   "scripts": {
     "build": "tsup",
     "start": "node --env-file-if-exists=.env dist/index.js",

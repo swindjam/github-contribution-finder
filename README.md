@@ -6,9 +6,16 @@ This is a small demo project to showcase the use of MCP tools, agent skills and 
 This is designed to work on the basis of finding a repo to contribute to, based on user input. 
 The main skill is `find-repo-for-contribution` which triggers usage of the MCP server tools and the other skills and subagent.
 
-Example starting prompt to trigger the skills and tools
+Example starting prompt to trigger the skills and tools:
 
 > find me a github repo to contribute to
+
+The flow of this after the prompt is:
+
+`find-repo-for-contribution (skill) -> search_repos (mcp tool) -> evaluate-repo (subagent)`
+
+And inside the subagent
+`evaluate-repo-suitability / evaluate-repo-issue-suitability (skills) + get_repo / search_repo_issues / get_repo_issue (mcp tools)`
 
 
 Getting started

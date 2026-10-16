@@ -1,24 +1,24 @@
 ---
 name: find-repo-for-contribution
 description: >-
-   Based on the user's question, find a prioritised list of 3 Github repositories they could contribute to. 
-  Ask qualifying questions to understand the users experience and stack familiarity.
+    Based on the user's question, find a prioritised list of 3 Github repositories they could contribute to. 
+    Ask qualifying questions to understand the users experience and stack familiarity.
     Use this skill when the user asks for a suggestion or to help find them a repo to contribute to. 
-  This depends on the github-contribution-finder server, which should be the sole source of information.
+    This depends on the github-contribution-finder server, which should be the sole source of information.
 ---
 
 # Ask qualifying questions
 
 Suitable repositories will depend on the user's knowledge. 
 An experienced engineer can likely contribute to any repo in a known stack, but will benefit from a well documented repo in an unfamiliar stack.
-A less experience engineer will benefit from a well documented repo regardless.
+A less experienced engineer will benefit from a well documented repo regardless.
 
 Ask a max of 3 clarifying questions such as:
 - What is your experience level with <language>?
 - What is your strongest language and how much experience do you have?
 
 Skip any/all of these questions if the information is already given. 
-E.g. "I am an experience Go engineer looking to contribute to Go projects" shares the experience and stack knowledge up front.
+E.g. "I am an experienced Go engineer looking to contribute to Go projects" shares the experience and stack knowledge up front.
 
 From these questions, create a goal to satisfy them. E.g. "Find a Go repo suitable for an experienced engineer who is new to Go"
 

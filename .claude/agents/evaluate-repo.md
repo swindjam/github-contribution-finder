@@ -1,10 +1,11 @@
 ---
 name: evaluate-repo
 description: Evaluates a specified Github repo for suitability based on the specified criteria
-tools: mcp__github-contribution-finder__get_repo, 
-  mcp__github-contribution-finder__search_repo_issues, 
-  mcp__github-contribution-finder__get_repo_issue, 
-  Skill
+tools: 
+    mcp__github-contribution-finder__get_repo, 
+    mcp__github-contribution-finder__search_repo_issues, 
+    mcp__github-contribution-finder__get_repo_issue, 
+    Skill
 model: sonnet
 ---
 
